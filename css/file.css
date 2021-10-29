@@ -112,8 +112,8 @@ overflow-y: hidden;
     color:white
 }
 
-.background-painting{
-    height:0px;
+.background-painting>img{
+    height:100%;
     width:100%;
     background-position: center;
     background-size: cover;
@@ -133,14 +133,12 @@ overflow-y: hidden;
     position: relative;
 }
 .painting>img{
-    height: 250px;
-    width: 420px;
+    height: 100%;
+    width: 100%;
     box-sizing: border-box;
     box-shadow: 0 0 10px;
 }
 .painting{
-    height:250px;
-    width:100%;
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
