@@ -4,6 +4,7 @@ function move(distance){
 }
 
 $(document).ready(function() {
+   hide()
     $(window).scroll(function(event) {
        var pos_body = $('html,body').scrollTop();
        if(pos_body>120){
