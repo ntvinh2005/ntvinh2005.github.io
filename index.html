@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>My Painting</title>
+    <link rel="stylesheet"  href="css/file.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
+    <script src="./js/main.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-latest.js"></script>
+</head>
+<body>
+    <header>
+    </header>
+    <head>
+      <div class='nav'></div>
+      <div class="nav-wrapper">
+        <div class="left-side">
+            <div class="nav-link  active-nav-link">
+            <a href="index.html">HOME  </a>
+            </div>
+            <div class="nav-link">
+            <a href="About.html">ABOUT</a>
+            </div>
+        </div>
+        <div class="right-side">
+            <div class="brand"> 
+                <a href="About.html">V</a>
+            </div>
+        </div>
+    </div>
+</div>
+    </head>
+
+<div class="welcome-form">
+  <div class="painting-saying">
+  <div class="background-painting">
+  <img src="image/seaside.jpg" alt="">
+  </div>
+  <div class="saying">
+  <p class="first-saying"> Welcome to my website. </p>
+  <p class="second-saying"> Here's my galery of painting that I have draw in the summer.</p>
+  </div>
+</div>
+</div>
+    <div class="container">  
+  <div class="content">
+      <div class="collection">       
+          <div onclick="show(this)" class="painting-sub">
+              <div class="painting">
+            <img  src="image/Sea.png" alt="">
+              </div>
+              <div class="sub">
+                I painted this when trying water color. The painting include of three natural magnificient regions: Land, Ocean and Sky 
+              <div class="view"><i  class="far fa-eye"></i></div>
+              </div>
+              
+          </div>
+          <div onclick="show(this)"class="painting-sub">
+            <div class="painting">
+          <img  src="image/Mountain.png" alt="">
+            </div>
+            <div class="sub">The strong vitality of scraggy tree on the mountain spire me a lot</div>
+        </div>
+        <div onclick="show(this)" class="painting-sub">
+            <div class="painting">
+          <img  src="image/Ha Long.png" alt="">
+            </div>
+            <div class="sub">This is Ha Long Bay, one of the most famous landscape in Vietnam.</div>
+        </div>
+        <div onclick="show(this)" class="painting-sub">
+            <div class="painting">
+          <img  src="image/Autumn.png" alt="">
+            </div>
+            <div class="sub">I live in Hanoi, which is combination between the ancient and modern value. The painting tells us about the autumn in my beloved city.</div>
+        </div>
+        <div onclick="show(this)" class="painting-sub">
+            <div class="painting">
+                <img  src="image/River.png" alt="">
+            </div>
+            <div class="sub">This is my favourite interested artwork about a river in Germany in winter.</div>
+        </div>
+        <div onclick="show(this)"class="painting-sub">
+            <div class="painting">
+          <img  src="image/Carp.png" alt="">
+            </div>
+            <div class="sub">Carp painting is famous in Asia. This is the first time I've ever tried it</div>
+        </div>
+        <div onclick="show(this)" class="painting-sub">
+            <div class="painting">
+          <img src="image/Kite.png" alt="">
+            </div>
+            <div class="sub">Kite symbolize for Vietnamese countryside. Further, flying kite is my favourite activity in Summer Holiday</div>
+        </div>
+        <div onclick="show(this)" class="painting-sub">
+            <div class="painting">
+          <img src="image/Vocano.png" alt="">
+            </div>
+            <div class="sub">It's a memory about the first time I've experienced designing a game</div>
+        </div>
+      </div>
+  </div>
+
+  <div class="back-to-top">
+    <i class="fas fa-angle-up"></i>
+    <script type="text/javascript" src="js/main.js"></script>
+  </div>
+  <div class="showContainer">
+    <div class="zoom-background" onclick="hide()"></div>
+    <img onclick="show(this)" class="zoom-image" src="big-image/Sea.png" alt="">
+  </div>
+</body>
+</html>
+/*fa-arrow-circle-up*/
