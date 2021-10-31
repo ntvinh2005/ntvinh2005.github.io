@@ -1,13 +1,14 @@
 body{
     margin: 0px;
     background-color:lightyellow;
+    z-index: 1;
 }
 .nav{
     display:flex;
     width: 100%;
     height: 15%;
     position:fixed;
-    z-index: 1;
+    z-index: 2;
     overflow-x: hidden;
     overflow-y: hidden;
     background-color:khaki;
@@ -23,7 +24,7 @@ overflow-x: hidden;
 overflow-y: hidden;
 }
 .nav-wrapper>div{
-    z-index: 1;
+    z-index: 2;
 }
 .left-side{
     display: flex;
@@ -35,38 +36,21 @@ overflow-y: hidden;
 }
 .right-side{
     font-size: 20px;
+    top:1.5%;
     left:90%;
     height: 30px;
     width: 30px;
     position:fixed;
 }
-.brand{
+.brand>a>img{
     color: darkgrey;
-    text-decoration: none;
     display: flexbox;
     text-align: center;
     border-radius: 50%;
     border-color: black;
     cursor: pointer;
-    border-bottom: 1px solid transparent;
-    transition: border-bottom 0.5s;
 }
-.brand:hover{
-    text-decoration: none;
-    display:flexbox;
-    height:25px;
-    width: 25px;
-    box-shadow: 1px 1px 1px;
-    transition: 0.5s;
-}
-.brand a{
-    color: black;
-    text-decoration: none;
-    transition: color 0.5s;
-}
-.brand a:hover{
-    color:darkviolet;
-}
+
 .nav-link{
     height: 22px;
     border-bottom: 1px solid transparent;
@@ -119,17 +103,25 @@ overflow-y: hidden;
     height:100%;
     width:100%;
     align-items: center;
+    z-index: -1;
 }
-.zoom-background{
+.background-painting2{
+    position:fixed;
     top:0;
     left:0;
-    width: 100%;
-    height: 100%;
-    align-items: center;
+    height:100%;
+    width: 20%;
+    z-index: -1;
+}
+.saying>img{
     position:fixed;
-    z-index: 9999;
+    margin-left: 60%;
+    margin-top:15%;
+    color: darkgrey;
+    display: flexbox;
+    border-radius: 50%;
+    border-color: black;
     cursor: pointer;
-    background-color: rgb(0,0,0,0.7);
 }
 
 /*content*/
@@ -265,6 +257,8 @@ overflow-y: hidden;
     border-radius: 20%;
     border-color: lightgreen;
     box-shadow: lightgrey 10px 10px 10px 10px;
+    background-color: rgb(0,0,0,0.5);
+    color: seashell;
 }
 .title{
     font-family: Georgia, 'Times New Roman', Times, serif;
@@ -278,9 +272,10 @@ overflow-y: hidden;
 }
 .Family{
     text-align: center;
-    margin-top: 200px;
+    margin-top: 400px;
     margin-left: 100px;
     margin-right: 100px;
+    z-index: 1;
 }
 .education{
     text-align: center;
@@ -299,9 +294,10 @@ overflow-y: hidden;
 }
 
 .img-hobby>img{
-    height: 250px;
-    width: 420px;
+    height: 100%;
+    width: 100%;
     box-sizing: border-box;
+    border-radius: 5%;
 }
 .img-hobby{
     display: grid;
@@ -310,54 +306,58 @@ overflow-y: hidden;
 .ambition{
     text-align: center;
 }
+.ambition>img{
+    border-radius: 5%;
+}
+.text{
+    margin-top: 3%;
+    margin-left: 20%;
+    margin-right:20%;
+    margin-bottom: 3%;
+    box-sizing: border-box;
+    border-radius: 10%;
+    color: seashell;
+    background-color: rgb(0,0,0,0.3);
+    box-shadow: silver 1px 1px 1px 1px;
+}
+
 .navigation{
-    display: inline-flex;
-    top:100px;
-    left:10%;
+    top:33%;
+    left:33%;
     text-align: center;
-    position: relative;
+    align-items: center;
     font-style:italic ;
 }
-.pre{
-    cursor: pointer;
-    display:inline-flex;
-    margin-left: 430px;
 
-}
-.next{
-    cursor: pointer;
-    display:inline-flex;
-    margin-left: 20px;
-}
-.logo{
-    margin-left:500px ;
-    height:100%;
+.logo>img{
+    z-index:0;
+    border-radius: 15%;
     background-position: center;
     background-size: cover;
-    background-repeat: no-repeat;
+    width:40%;
+    box-sizing: border-box;
+    border-radius: 50%;
+    position: relative;
 }
-
-.outline{
-    position: absolute;
-    display: flex;
-    top: 0;
-    flex-direction:column;
-    justify-content: center;
+table{
+    top: 75%;
+    left: 35%;
+    position:absolute;
+    width: 30%;
+    height: 60%;
+    align-self: center;
     text-align: center;
-    height: 100%;
-    align-items: center;
-    padding-left: 100px;
-    padding-right: 100px;
-}
-.up{
-    display:inline-flex;
-    margin-bottom: 50px;
-}
-.down{
-    display:inline-flex;
-}
-.back{
     cursor: pointer;
+}
+th{
+ text-align: center;
+ font-size: 200%;
+ font-weight: bold;
+}
+td{
+  text-align: center;
+  font-size: 200%;
+  font-weight: bold;
 }
 .contact{
     height:30px;
