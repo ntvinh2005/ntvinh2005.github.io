@@ -134,6 +134,7 @@ overflow-y: hidden;
 }
 .painting-sub{
     position: relative;
+    cursor: pointer;
 }
 .painting>img{
     height: 100%;
