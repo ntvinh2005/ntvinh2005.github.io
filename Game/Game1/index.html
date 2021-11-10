@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vinh Test Play XO</title>
+    <link rel="stylesheet" href="style.css"></link>
+    <script src="script.js"></script>
+    <script src="script.js" type="module"></script>
+</head>
+<body>
+    <button class='title'>Guessing and betting</button>
+    <div class='rule'>Rule: Find out treasure (red) by clicking on tiles to gain 1$/treasure. You can gain or loose more money by guessing the Team (X && O) who will find out the treasure. Beat the AI. Good luck!
+             Luật: Chọn một ô để tìm. Màu vàng là không có kho báu, màu đỏ là có kho báu. Cược kho báu được tìm thấy ở lượt của X hay O. Đối thủ của bạn là người máy. Chúc may mắn!</h1>
+    </div>
+    <table>
+        <tr>
+            <td><h2>Turn:</h2></td>
+            <td><div class="turn">0</div></td>
+            <td><h2>Your money:</h2></td>
+            <td><div id='Hu-money'>0</div></td>
+            <td>$</td>
+            <td><h2>Robot money:</h2></td>
+            <td><div id='AI-money'>5</div></td>
+            <td>$</td>
+        </tr>
+        <tr>
+            <td><h2 id='label-team-O'>Team O:</h2></td>
+            <td><div class='score' id='score-O'>0</div></td>
+            <td>
+                <button id="bet-element-O" class='bet-element' onclick='plus_bet(this,1)'>0</button>
+            </td>
+            <td></td>
+            <td></td>
+            <td>
+                <button id="bet-element-O-AI" class='bet-element'>0</button>
+            </td>
+        </tr>
+        <tr>
+            <td><h2 id='label-team-X'>Team X:</h2></td>
+            <td><div class='score' id='score-X'>0</div></td>
+            <td>
+                <button id="bet-element-X" class="bet-element" onclick='plus_bet(this,1)'>0</button>
+            </td>
+            <td></td>
+            <td></td>
+            <td>
+                <button id="bet-element-X-AI" class="bet-element">0</button>
+            </td>
+        </tr>
+    </table>
+    
+    <div class="wrapper">
+        <div class="group"></div>
+    </div>
+</body>
+</html>

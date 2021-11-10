@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vinh Drawing Paper</title>
+    <link rel="stylesheet" href="style1.css"></link>
+    <script src="script2.js"></script>
+    <script src="script2.js" type="module"></script>
+</head>
+<body>
+    <button class='title'>Painting</button>
+    <div class='rule'>
+        <h2>Click on the tile to draw. Choose color from the pallet. Click the tile with the same color to erase</h2>
+    </div>
+    
+    <div class="wrapper">
+        <table>
+            <tr>
+                <td><div class="group"></div></td>
+                <td class='colors'>
+                    <h1 class="tutorial">Chosen color</h1>
+                    <div class='current-color'></div>
+                    <h1 class='tutorial'>Pick below color</h1>
+                    <div id="red" onclick="changeColor(this)"></div>
+                    <div id='yellow' onclick="changeColor(this)"></div>
+                    <div id='blue' onclick="changeColor(this)"></div>
+                    <div id='green' onclick="changeColor(this)"></div>
+                    <div id='purple' onclick="changeColor(this)"></div>
+                    <div id='brown' onclick="changeColor(this)"></div>
+                    <div id='pink' onclick="changeColor(this)"></div>
+                    <div id='orange' onclick="changeColor(this)"></div>
+                    <div id='gray' onclick="changeColor(this)"></div>
+                    <div id='black' onclick="changeColor(this)"></div>
+                </td>
+            </tr>
+        
+        </table>
+    </div>
+</body>
+</html>
