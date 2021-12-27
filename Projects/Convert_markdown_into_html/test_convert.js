@@ -6,7 +6,7 @@ const deleteAtIndex = (string, i, num) => {
 
 
 function checkForHeading(input){
-    var header=input[0]
+    header=input[0]
     output=input
     if (input[1]==input[0]) {
         header+=input[1]
@@ -50,10 +50,9 @@ function checkForHeading(input){
             return ('<blockquote>'+output+'</blockquote>')
         case '*':
             output=deleteAtIndex(output, 0, 1)
-            console.log('Did it')
             return ('<li>'+output+'</li>')
         default:
-            return(output)
+            return('<p>'+output+'</p>')
     }
 }
 
@@ -63,8 +62,8 @@ function replaceByIndex(string, index, alternative, delete_length) {
     return string
 }
 
-
-function searchForLink(input){
+// search for link and image
+function searchForLinkAndImg(input){
     letters=input
     let link_start=0
     let link_name=''
@@ -144,6 +143,7 @@ function searchForLink(input){
     return letters
 }
 
+//this function is used for searchForStar function
 function replace_Start_And_End(string, start_position, end_position, key) {
     switch (key) {
         case '*':
@@ -158,6 +158,21 @@ function replace_Start_And_End(string, start_position, end_position, key) {
             string=replaceByIndex(string, start_position, '<b><i>', 3)
             string=replaceByIndex(string, end_position+3, '</i></b>', 3)
             break;
+        case '_':
+            string=replaceByIndex(string, start_position, '<b>', 1)
+            string=replaceByIndex(string, end_position+2, '</b>', 1)
+            break;
+        case '__':
+            string=replaceByIndex(string, start_position, '<i>', 2)
+            string=replaceByIndex(string, end_position+1, '</i>', 2)
+            break;
+        case '___':
+            string=replaceByIndex(string, start_position, '<b><i>', 3)
+            string=replaceByIndex(string, end_position+3, '</i></b>', 3)
+            break;
+        case '~~':
+            string=replaceByIndex(string, start_position, '<strike>', 2)
+            string=replaceByIndex(string, end_position+6, '</strike>',2)
         default:
             break;
     }
@@ -179,6 +194,8 @@ function searchForStar(input){
     star_end=0
     var i=0
     while(i<letters.length) {
+
+        //bold and italic using ***  ***
         if (letters[i]==='*') {
             if (star_start==0)  {
                 star_start+=1;
@@ -228,15 +245,100 @@ function searchForStar(input){
                 }
             }
         }
+
+        // bold and italic using ___ ___
+        if (letters[i]==='_') {
+            if (star_start==0)  {
+                star_start+=1;
+                start_position=i
+            } else star_end+=1
+
+            if (star_start==1 && star_end==1) {
+                letters=replace_Start_And_End(letters, start_position, i, '_') 
+                console.log(letters)
+                star_start=0
+                start_position=0
+                star_end=0
+                i+=1
+                continue
+            }
+            i+=1
+            if (letters[i]==='_') {
+                if (star_start==1 && star_end==0) { 
+                    star_start+=1 
+                } else star_end+=1
+
+                if (star_start==2 && star_end==2) {
+                    letters=replace_Start_And_End(letters, start_position, i-1, '__') 
+                    console.log(letters)
+                    star_start=0
+                    start_position=0
+                    star_end=0
+                    i+=1
+                    continue
+                }
+                i+=1
+                if (letters[i]==='_'){
+                    if (star_start==2 && star_end==0) { 
+                        star_start+=1 
+                    } else star_end+=1
+    
+                    if (star_start==3 && star_end==3) {
+                        letters=replace_Start_And_End(letters, start_position, i-2, '___') 
+                        console.log(letters)
+                        star_start=0
+                        start_position=0
+                        star_end=0
+                        i+=1
+                        continue
+                    }
+                    i+=1
+                }
+            }
+        }
         else i+=1
     };
     return letters
 }
 
+function searchForStrikeThrough(letters){
+    let i=0
+    let start_position = 0
+    let isStrikeThrough = false
+    while (i<letters.length) {
+        if (letters[i]==='~' && letters[i+1]==='~' && !isStrikeThrough) {
+            start_position = i
+            i+=2
+            isStrikeThrough = true
+        } else if (letters[i]==='~' && letters[i+1]==='~' && isStrikeThrough) {
+            letters = replace_Start_And_End(letters, start_position, i, '~~')
+            i+=15
+            console.log('yeah')
+            isStrikeThrough = false
+        } else {
+            i+=1
+            console.log('normal')
+            console.log(i+ letters[i]==='~' && letters[i+1]==='~' && isStrikeThrough)}
+    }
+    return letters
+}
+
+
+function searchForCodeSetence(letters){
+    letters = deleteAtIndex(letters, 0, 1)
+    letters = deleteAtIndex(letters, 0, 1)
+    letters = deleteAtIndex(letters, 0, 1)
+    var code_node = document.createElement('div')
+    var code_node_text = document.createTextNode('<code>'+letters+'</code> <br>')
+    code_node.appendChild(code_node_text)
+    document.querySelector('#output').appendChild(code_node)
+}
+
 function searchInParagraph(input){
-    input = searchForLink(input)
+    input = searchForLinkAndImg(input)
     input = searchForRuler(input)
     input = searchForStar(input)
+    input = searchForStrikeThrough(input)
     input = checkForHeading(input)
     
     return input
@@ -348,8 +450,12 @@ function test(){
     
     new_para = []
     lines.forEach(line => {
-        line=searchInParagraph(line)
-        new_para.push(line)
+        if ((line[0]==='\'' && line[1] ==='\'' && line[2] ==='\'')||(line[0]==='~' && line[1] ==='~' && line[2] ==='~')) {
+            searchForCodeSetence(line)
+        } else {
+            line=searchInParagraph(line)
+            new_para.push(line)
+        }
     });
 
     let i=0
@@ -363,6 +469,8 @@ function test(){
         } 
 
         if (count_for_cells(line)<1){
+            console.log(line[line.length-1])
+            
             var node = document.createTextNode(line)
             var down = document.createElement('br')
             document.querySelector('#output').appendChild(node)
@@ -371,7 +479,6 @@ function test(){
         else if (isNewTable === true && count_for_cells(line)>0) {
             searchForCells(new_para, current_index = lookForIndex(new_para, line))
         }
-        
         i+=1
     });
     
