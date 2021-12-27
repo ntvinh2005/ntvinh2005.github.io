@@ -315,10 +315,7 @@ function searchForStrikeThrough(letters){
             i+=15
             console.log('yeah')
             isStrikeThrough = false
-        } else {
-            i+=1
-            console.log('normal')
-            console.log(i+ letters[i]==='~' && letters[i+1]==='~' && isStrikeThrough)}
+        } else i+=1
     }
     return letters
 }
@@ -449,9 +446,11 @@ function test(){
     rows=[]
     
     new_para = []
+    code_lines = []
     lines.forEach(line => {
         if ((line[0]==='\'' && line[1] ==='\'' && line[2] ==='\'')||(line[0]==='~' && line[1] ==='~' && line[2] ==='~')) {
-            searchForCodeSetence(line)
+            code_lines.push(line)
+            new_para.push(line)
         } else {
             line=searchInParagraph(line)
             new_para.push(line)
@@ -470,11 +469,17 @@ function test(){
 
         if (count_for_cells(line)<1){
             console.log(line[line.length-1])
-            
-            var node = document.createTextNode(line)
-            var down = document.createElement('br')
-            document.querySelector('#output').appendChild(node)
-            document.querySelector('#output').appendChild(down)
+            console.log(checkForExistence(code_lines, line))
+            if (checkForExistence(code_lines, line)) {
+                searchForCodeSetence(line)
+                console.log('bug fixed')
+            }
+            else {
+                var node = document.createTextNode(line)
+                var down = document.createElement('br')
+                document.querySelector('#output').appendChild(node)
+                document.querySelector('#output').appendChild(down)
+            }
         }
         else if (isNewTable === true && count_for_cells(line)>0) {
             searchForCells(new_para, current_index = lookForIndex(new_para, line))
@@ -496,3 +501,13 @@ function lookForIndex(array, item) {
     return i
 }
 
+function checkForExistence(array, item) {
+    isExist = false
+    array.forEach(element => {
+        if (element===item) {
+            console.log(element, item)
+            isExist = true
+        }
+    });
+    return isExist
+}
