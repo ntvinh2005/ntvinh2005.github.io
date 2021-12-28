@@ -1,0 +1,56 @@
+.container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 1rem
+}
+.container>div {
+    align-items: center;
+    align-content: center;
+    border-radius: .25rem;
+    background-color: azure;
+    box-shadow: 0 0 5px 2px rgba(0,0,0,.3);
+    min-height: 300px;
+    margin-top: 3%;
+}
+
+.input{
+    text-align: center;
+}
+
+#output{
+    border-style: groove;
+    border-color: rgb(61, 56, 54);
+    border-width: 4px;
+    width: 46%;
+}
+.sample{
+    text-align: center;
+}
+button{
+    max-width: fit-content;
+    align-self: center;
+    padding: 1%;
+}
+textarea{
+    max-width: 97%;
+    min-height: fit-content
+}
+.update-button{
+    max-width: 97%;
+    margin-left: 1.5%;
+}
+.control-panel{
+    width: 8%;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.control-panel>p{
+    text-decoration: solid;
+    font-size: 40px;
+    font-weight: 300;
+    font-family: fantasy;
+}
