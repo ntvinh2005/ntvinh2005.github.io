@@ -3,71 +3,106 @@
 <head>
     <meta charset="UTF-8">
     <title>My Painting</title>
-    <link rel="stylesheet"  href="css/file.css"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css" />
-    <link rel="stylesheet"  href="css/landing.css"/>
+    <link rel="stylesheet" href="css/file.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"/>
+    <link rel="stylesheet" href="css/landing.css"/>
     <script src="./js/main.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://code.jquery.com/jquery-latest.js"></script>
 </head>
 <body>
     <nav>
-      <div class='nav'></div>
-      <div class="nav-wrapper">
-        <div class="left-side">
-            <div class="nav-link  active-nav-link">
-            <a href="index.html">HOME  </a>
+        <div class='nav'></div>
+        <div class="nav-wrapper">
+            <div class="left-side">
+                <div class="nav-link active-nav-link">
+                    <a href="index.html">HOME</a>
+                </div>
+                <div class="nav-link">
+                    <a href="#about">ABOUT</a>
+                </div>
+                <div class="nav-link">
+                    <a href="#projects">PROJECTS</a>
+                </div>
+                <div class="nav-link">
+                    <a href="#contact">CONTACT</a>
+                </div>
             </div>
-            <div class="nav-link">
-            <a href="About.html">ABOUT</a>
-            </div>
-            <div class="nav-link">
-            <a href="About.html">PROJECTS</a>
-            </div>
-            <div class="nav-link">
-            <a href="About.html">CONTACT</a>
+            <div class="right-side">
+                <div class="brand">
+                    <a href="#about"><img src="image/Logo.png" alt="Logo"></a>
+                </div>
             </div>
         </div>
-        <div class="right-side">
-            <div class="brand"> 
-              <a href="About.html"><img src="image/Logo.png" alt=""></a>
-            </div>
-        </div>
-    </div>
-</div>
-</nav>
+    </nav>
+
     <div class="container">
         <div class="content">
             <div class="photo-container">
                 <img src="image/vinh.jpg" alt="Your Name" class="photo">
             </div>
             <div class="text-box">
-                <p id = "typing-text">Hi, I'm Vinh Nguyen, a Computer Science sophomore at University of Florida.</p>
-                <a id="cta-button" href="#skills" class="cta-button">Want to know more about me?</a>
+                <p id="typing-text">Hi, I'm Vinh Nguyen, a Computer Science sophomore at University of Florida.</p>
+                <a id="cta-button" href="#about" class="cta-button">Want to know more about me?</a>
             </div>
         </div>
     </div>
-    <section class="skills" id = "skills">
-        <h2>Skills</h2>
-        <ul>
-            <li>Programming Languages: Python, JavaScript, C++</li>
-            <li>Tools & Technologies: Git, Docker, React</li>
-            <li>Soft Skills: Problem-solving, Communication</li>
-        </ul>
+
+    <section class="about" id="about">
+        <div class="container">
+            <div class="section-title">
+                <h2>About Me</h2>
+            </div>
+            <div class="section-content">
+                <p>Provide a brief introduction about yourself, your background, interests, and goals.</p>
+            </div>
+        </div>
     </section>
 
     <section class="projects" id="projects">
-        <h2>Featured Projects</h2>
-        <!-- Add project details here -->
+        <div class="container">
+            <div class="section-title">
+                <h2>Projects</h2>
+            </div>
+            <div class="project-grid">
+                <div class="project-item">
+                    <div class="project-image">
+                        <img src="image/Buddhism.jpg" alt="Project 1">
+                    </div>
+                    <h3>Project Title 1</h3>
+                    <p>Short description of the project.</p>
+                </div>
+                <div class="project-item">
+                    <div class="project-image">
+                        <img src="image/seaside.jpg" alt="Project 2">
+                    </div>
+                    <h3>Project Title 2</h3>
+                    <p>Short description of the project.</p>
+                </div>
+                <!-- Add more projects as needed -->
+            </div>
+        </div>
     </section>
 
     <section class="contact" id="contact">
-        <h2>Contact Me</h2>
-        <!-- Add contact form and social links here -->
+        <div class="container">
+            <div class="section-title">
+                <h2>Contact</h2>
+            </div>
+            <div class="section-content">
+                <p>If you’d like to get in touch, feel free to send me a message:</p>
+                <form action="#" method="post">
+                    <input type="text" name="name" placeholder="Your Name" required>
+                    <input type="email" name="email" placeholder="Your Email" required>
+                    <textarea name="message" placeholder="Your Message" required></textarea>
+                    <button type="submit">Send</button>
+                </form>
+            </div>
+        </div>
     </section>
 
     <footer>
-        <p>&copy; 2024 [Your Name]. All rights reserved.</p>
+        <p>&copy; 2024 Vinh Nguyen. All rights reserved.</p>
     </footer>
 </body>
 </html>
