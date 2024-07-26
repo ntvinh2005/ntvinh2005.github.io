@@ -10,7 +10,7 @@ nav {
 /* Container Styling */
 .container {
     margin-top: 15%;
-    padding: 80px 20px 20px; /* Adjust padding to account for fixed navbar */
+    padding: 80px 20px 20px; /
 }
 
 .content {
@@ -21,13 +21,13 @@ nav {
 }
 
 .photo-container {
-    margin-right: 20px; /* Space between photo and text box */
+    margin-right: 20px; 
 }
 
 .photo {
     border-radius: 50%;
-    width: 300px;
-    height: 300px;
+    width: 50vh;
+    height: 50vh;
     object-fit: cover;
 }
 
@@ -44,7 +44,7 @@ nav {
     content: '';
     position: absolute;
     top: 50%;
-    left: -8px; /* Adjust based on the size and spacing */
+    left: -8px; 
     margin-top: -10px;
     width: 0;
     height: 0;
@@ -79,20 +79,19 @@ nav {
 #cta-button {
     display: block;
     margin-top: 20px;
-    background-color: #007BFF; /* Adjust color as needed */
     color: white;
     text-decoration: none;
     border-radius: 5px;
     padding: 10px 20px;
     font-size: 1rem;
     transition: background-color 0.3s ease;
-    opacity: 0; /* Initially hidden */
+    opacity: 0; 
     animation: showCTA 1s forwards;
-    animation-delay: 4s; /* Matches the duration of the typing effect */
+    animation-delay: 4s; 
 }
 
 #cta-button:hover {
-    background-color: #0056b3; /* Darker shade for hover effect */
+    background-color: #0056b3; 
 }
 
 /* Section Styling */
@@ -106,7 +105,7 @@ section {
 }
 
 .section-title h2 {
-    font-size: 2.5rem; /* Consistent font size */
+    font-size: 2.5rem; 
     margin: 0;
 }
 
