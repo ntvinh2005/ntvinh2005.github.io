@@ -1,6 +1,7 @@
 import VFibDataArray from './data.js';
+import { amplitudeScale, timeScale } from './scale_slide.js';
 
-const dataArray = VFibDataArray;
+let dataArray = VFibDataArray;
 
 const canvas = document.getElementById('augmentedECGCanvas');
 const ctx = canvas.getContext('2d');
@@ -8,9 +9,7 @@ const ctx = canvas.getContext('2d');
 const canvasWidth = canvas.width;
 const canvasHeight = canvas.height;
 
-// These are scaling factors
-const amplitudeScale = 0.1; 
-const timeScale = 2; 
+let prevYValue = 0;
 
 // Animation variables
 let offset = 0; // This variable is use to track the horizontal scrolling
@@ -52,32 +51,107 @@ function updateNoise() {
     }
 }
 
-const numberOfSection = 5;
+let startEndIndexArray = [];
+
+const numberOfSection = 4;
 const sectionWidth = (dataArray.length - dataArray.length % numberOfSection) / numberOfSection;
+let parabolaConstant = 0.05;
 function updateSectionRandomOffsets() {
     let sectionRandomOffset = 0;
+    startEndIndexArray = [];
 
     for (let sectionIndex = 0; sectionIndex < numberOfSection; sectionIndex++) {
         const sectionStart = sectionIndex * sectionWidth;
         const sectionEnd = sectionIndex === numberOfSection - 1
             ? dataArray.length //In case the last section do not have enough number of elements equal to sectionWidth.
             : sectionStart + sectionWidth;
-
-        if (sectionIndex % 2 === 0) sectionRandomOffset = getRandomValue(0, 1000);
-        else if (sectionIndex % 2 === 1) sectionRandomOffset = getRandomValue(-1000, 0);
+        startEndIndexArray.push(sectionStart, sectionEnd);
+        parabolaConstant = getRandomValue(0.02, 0.05);
 
         // We apply the random offset to all indices in this section
-        for (let i = sectionStart; i < sectionEnd; i++) {
-            randomSectionOffsets[i] = sectionRandomOffset;
+        if (sectionIndex % 2 == 0) {
+            for (let i = sectionStart; i < sectionEnd; i++) {
+                randomSectionOffsets[i] = (sectionWidth/2)*(sectionWidth/2)*parabolaConstant - parabolaConstant * (i - sectionStart - sectionWidth/2) * (i - sectionStart - sectionWidth/2);
+            }
+        }
+        else {
+            for (let i = sectionStart; i < sectionEnd; i++) {
+                randomSectionOffsets[i] = -(sectionWidth/2)*(sectionWidth/2)*parabolaConstant + parabolaConstant * (i - sectionStart - sectionWidth/2) * (i - sectionStart - sectionWidth/2);
+            }
         }
     }
 }
 
+function drawRedLine(x) {
+    ctx.strokeStyle = "red";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.moveTo(x, 0);
+    ctx.lineTo(x, canvasHeight);
+    ctx.stroke();
+}
+
+// This shuffle function uses the Fisher-Yates algorithm.
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1)); // This allows us to choose a random index from 0 to i.
+        [array[i], array[j]] = [array[j], array[i]]; // Then, swap.
+    }
+    return array;
+}
+
+function updateRandomShuffle() {
+    let currentArray = [];
+    let positiveArray = [];
+    let negativeArray = [];
+    let isPositive = (dataArray[0] > 0);
+
+    // First, divide the array into 2 separated arrays: positive and negative sections
+    for (let i = 0; i < dataArray.length; i++) {
+        currentArray.push(dataArray[i]);
+
+        if ((dataArray[i] > 0) !== isPositive) {
+            isPositive = !isPositive;
+            if (isPositive) {
+                positiveArray.push(currentArray); 
+            } else {
+                negativeArray.push(currentArray);
+            }
+            currentArray = [];
+        }
+    }
+
+    // Check if the last segment is positive or negative, then push.
+    if (currentArray.length > 0) {
+        if (isPositive) {
+            positiveArray.push(currentArray);
+        } else {
+            negativeArray.push(currentArray);
+        }
+    }
+
+    // Here we shuffle both the positive and negative arrays (shuffle the sections inside each array) using Fisher-Yates method.
+    shuffleArray(positiveArray);
+    shuffleArray(negativeArray);
+
+    // Now, we will merge the arrays alternatively: one section from positiveArray and then one from negativeArray and then continue like that
+    dataArray = [];
+    let maxLength = Math.max(positiveArray.length, negativeArray.length);
+
+    for (let i = 0; i < maxLength; i++) {
+        if (i < positiveArray.length) {
+            dataArray = dataArray.concat(positiveArray[i]);
+        }
+        if (i < negativeArray.length) {
+            dataArray = dataArray.concat(negativeArray[i]);
+        }
+    }
+}
 
 function drawECG() {
     ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 
-    // This is to create grid line
+    // This is to create grid lines
     ctx.strokeStyle = "#ddd";
     ctx.lineWidth = 1;
     for (let x = 0; x < canvasWidth; x += 50) {
@@ -93,16 +167,22 @@ function drawECG() {
         ctx.stroke();
     }
 
+    //draw red line for start and end of a section
+    for (let i = 0; i < startEndIndexArray.length; i++) {
+        let x = startEndIndexArray[i] * timeScale - offset;
+        drawRedLine(x);
+    }
+
+    // Draw the ECG waveform
     ctx.strokeStyle = "blue";
     ctx.lineWidth = 2;
     ctx.beginPath();
-    let startY = canvasHeight / 2;
-    //End of grid line code.
+    const startY = canvasHeight / 2;
 
-    //This is where we start drawing our ECG waveform.
     for (let x = 0; x <= canvasWidth; x++) {
-        let dataIndex = Math.floor((x + offset) / timeScale) % dataArray.length;
-        let yValue = startY - (noiseArray[dataIndex] +  randomOffsets[dataIndex] + randomSectionOffsets[dataIndex]) * amplitudeScale;
+        const dataIndex = Math.floor((x + offset) / timeScale) % dataArray.length;
+        const yValue = startY - (dataArray[dataIndex] + randomOffsets[dataIndex] + randomSectionOffsets[dataIndex]) * amplitudeScale;
+
         if (yValue >= startY - 1000 * amplitudeScale) {
             if (x === 0) {
                 ctx.moveTo(x, yValue);
@@ -116,10 +196,9 @@ function drawECG() {
 
     offset = (offset + 1) % (dataArray.length * timeScale);
     if (offset === 1) {
-        updateRandomOffsets();
         updateSectionRandomOffsets();
-        updateNoise();
-        //console.log(randomSectionOffsets);
+        updateRandomShuffle();
+        console.log(dataArray)
     }
 
     requestAnimationFrame(drawECG);

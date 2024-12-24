@@ -14,6 +14,29 @@
     </style>
 </head>
 <body>
+    <div>
+        <label for="amplitudeScaleSlider">Amplitude Scale:</label>
+        <input
+          id="amplitudeScaleSlider"
+          type="range"
+          min="0.01"
+          max="1"
+          step="0.01"
+          value="0.1"
+        />
+    </div>
+    <div>
+        <label for="timeScaleSlider">Time Scale:</label>
+        <input
+          id="timeScaleSlider"
+          type="range"
+          min="1"
+          max="10"
+          step="0.1"
+          value="2"
+        />
+    </div>
+    <script type="module" src="scale_slide.js"></script>
     <canvas id="ecgCanvas" width="1200" height="500"></canvas>
     <script type="module" src="standard_waveform.js"></script>
     <canvas id="augmentedECGCanvas" width = "1200" height = "500"></canvas>
